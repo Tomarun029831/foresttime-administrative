@@ -7,15 +7,13 @@ export interface Account {
 }
 
 export interface Employee {
-    id: string
+    id: string // Uuid
     name: string
-    employeeNumber: string
-    department: string
-    position: string
     phoneNumber: string
     email?: string
+    department: string
+    position: string
     hireDate: Date
-    isActive: boolean
 }
 
 export interface GeoFence {
@@ -52,7 +50,7 @@ export interface Tool {
 
 export interface Punch {
     id: string
-    employeeId: string
+    employeeId: string // refer to employeeId(Uuid)
     type: "punch_in" | "punch_out"
     timestamp: Date
     location: {
@@ -62,13 +60,11 @@ export interface Punch {
     geoFenceId?: string
     toolIds: string[]
     notes?: string
-    weather?: string
-    temperature?: number
 }
 
 export interface WorkReport {
     id: string
-    employeeId: string
+    employeeId: string // refer to employeeId(Uuid)
     date: Date
     workType: string
     location: string
