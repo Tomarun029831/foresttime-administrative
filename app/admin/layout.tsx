@@ -11,6 +11,8 @@ import {
     Wrench,
     FileText,
     CheckCircle,
+    Trees,
+    LogOut,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -36,6 +38,27 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            {/* Header */}
+            <header className="bg-white border-b border-green-200 shadow-sm">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-16">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                                <Trees className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                                <h1 className="text-xl font-bold text-green-800">ForestTime</h1>
+                                <p className="text-xs text-muted-foreground">管理システム</p>
+                            </div>
+                        </div>
+                        <Button onClick={() => { }  /* onLogout */} variant="outline" size="sm">
+                            <LogOut className="w-4 h-4 mr-2" />
+                            ログアウト
+                        </Button>
+                    </div>
+                </div>
+            </header>
+
             <div className="flex gap-6">
                 {/* Sidebar Navigation */}
                 <aside className="w-64 space-y-2">
@@ -72,6 +95,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                     </Card>
                 </main>
             </div>
-        </div>
+        </div >
     )
 }
