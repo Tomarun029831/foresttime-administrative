@@ -10,8 +10,6 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, MapPin, Plus, Edit2, Trash2, Save, RotateCcw } from "lucide-react"
 
-type Screen = "dashboard" | "geofence" | "attendance" | "employees" | "tools" | "reports"
-
 interface WorkAreaManagementProps {
     onNavigate: (screen: Screen) => void
 }
@@ -178,10 +176,6 @@ export default function WorkAreaManagement({ onNavigate }: WorkAreaManagementPro
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-4">
                         <div className="flex items-center space-x-3">
-                            <Button variant="ghost" onClick={() => onNavigate("dashboard")}>
-                                <ArrowLeft className="w-4 h-4 mr-2" />
-                                戻る
-                            </Button>
                             <div className="flex items-center space-x-3">
                                 <div className="bg-blue-600 rounded-lg p-2">
                                     <MapPin className="w-6 h-6 text-white" />

@@ -47,7 +47,7 @@ const mockTasks: Task[] = [
     },
 ]
 
-export function TaskManagement() {
+export default function TaskManagement() {
     const [tasks, setTasks] = useState<Task[]>(mockTasks)
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [newTask, setNewTask] = useState({

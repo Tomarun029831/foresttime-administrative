@@ -12,7 +12,7 @@ import { mockEmployees, mockPunches, mockGeoFences, mockTools } from "@/lib/mock
 import type { Punch } from "@/lib/types"
 import { timeFormatJPHM } from "@/lib/utils"
 
-export function AttendanceMonitoring() {
+export default function AttendanceMonitoring() {
     const [punches, setPunches] = useState<Punch[]>(mockPunches)
     const [filteredPunches, setFilteredPunches] = useState<Punch[]>(mockPunches)
     const [searchTerm, setSearchTerm] = useState("")

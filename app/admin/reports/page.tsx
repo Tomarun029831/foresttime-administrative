@@ -26,12 +26,6 @@ import {
     UserCheck,
 } from "lucide-react"
 
-type Screen = "dashboard" | "geofence" | "attendance" | "employees" | "tools" | "reports"
-
-interface DailyReportScreenProps {
-    onNavigate: (screen: Screen) => void
-}
-
 interface MovementData {
     timestamp: string
     latitude: number
@@ -88,7 +82,7 @@ interface EmployeeReport {
 
 type WorkReport = AdminReport | EmployeeReport
 
-export default function DailyReportScreen({ onNavigate }: DailyReportScreenProps) {
+export default function DailyReportScreen() {
     const [showForm, setShowForm] = useState(false)
     const [reportType, setReportType] = useState<"admin" | "employee">("admin")
     const [selectedReport, setSelectedReport] = useState<string | null>(null)
@@ -490,10 +484,6 @@ export default function DailyReportScreen({ onNavigate }: DailyReportScreenProps
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-4">
                         <div className="flex items-center space-x-3">
-                            <Button variant="ghost" onClick={() => onNavigate("dashboard")}>
-                                <ArrowLeft className="w-4 h-4 mr-2" />
-                                戻る
-                            </Button>
                             <div className="flex items-center space-x-3">
                                 <div className="bg-orange-600 rounded-lg p-2">
                                     <FileText className="w-6 h-6 text-white" />

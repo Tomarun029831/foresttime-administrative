@@ -12,6 +12,7 @@ import { Trees, Shield, Clock } from "lucide-react"
 import { mockAccounts } from "@/lib/mock-data"
 import { redirect } from "next/navigation"
 
+type ActiveView = "overview" | "geofence" | "attendance" | "employees" | "tasks" | "tools" | "reports"
 export default function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")

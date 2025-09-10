@@ -32,7 +32,7 @@ import {
 import { mockTools, mockToolTypes, mockEmployees } from "@/lib/mock-data"
 import type { Tool, ToolType } from "@/lib/types"
 
-export function ToolManagement() {
+export default function ToolManagement() {
     const [tools, setTools] = useState<Tool[]>(mockTools)
     const [toolTypes, setToolTypes] = useState<ToolType[]>(mockToolTypes)
     const [filteredTools, setFilteredTools] = useState<Tool[]>(mockTools)

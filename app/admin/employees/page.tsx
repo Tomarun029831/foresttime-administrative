@@ -21,7 +21,7 @@ import { Users, Plus, Edit, Trash2, Search, Phone, Mail, Calendar, Building } fr
 import { mockEmployees, mockPunches } from "@/lib/mock-data"
 import type { Employee } from "@/lib/types"
 
-export function EmployeeManagement() {
+export default function EmployeeManagement() {
     const [employees, setEmployees] = useState<Employee[]>(mockEmployees)
     const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>(mockEmployees)
     const [searchTerm, setSearchTerm] = useState("")

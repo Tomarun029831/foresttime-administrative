@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ja">
             <body>
-                {children} {/* ここに各ページの内容が入る */}
+                {children}
             </body>
         </html>
     )
