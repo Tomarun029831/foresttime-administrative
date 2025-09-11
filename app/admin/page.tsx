@@ -16,7 +16,7 @@ import { mockEmployees, mockPunches, mockTools, mockGeoFences } from "@/lib/mock
 type ActiveView = "overview" | "geofence" | "attendance" | "employees" | "tasks" | "tools" | "reports"
 export default function AdminDashboard() {
     const [activeView, setActiveView] = useState<ActiveView>("overview")
-    //HACK: const activeEmployees = mockEmployees.filter((emp) => emp.isActive).length
+    // HACK: const activeEmployees = mockEmployees.filter((emp) => emp.isActive).length
     const todayPunches = mockPunches.filter((punch) => {
         const today = new Date()
         const punchDate = new Date(punch.timestamp)
