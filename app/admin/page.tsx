@@ -1,18 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
-    Trees,
     Users,
     MapPin,
     Clock,
-    FileText,
     Wrench,
-    LogOut,
-    Activity,
     AlertTriangle,
     CheckCircle,
 } from "lucide-react"
