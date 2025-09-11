@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,24 +10,43 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Trees, Shield, Clock } from "lucide-react"
 import { mockAccounts } from "@/lib/mock-data"
 import { redirect } from "next/navigation"
+import { NextResponse } from "next/server"
+import { APILoginRequest, APILoginResponse } from "@/lib/types"
 
-type ActiveView = "overview" | "geofence" | "attendance" | "employees" | "tasks" | "tools" | "reports"
 export default function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         setError("")
 
         // Simple authentication check against mock data
-        const account = mockAccounts.find((acc) => acc.username === username && acc.password === password)
+        // const account = mockAccounts.find((acc) => acc.username === username && acc.password === password)
 
-        if (account) {
-            setIsLoggedIn(true);
-            redirect("/admin");
+        const acconut: APILoginRequest = { username: username, password: password };
+        const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(acconut)
+        });
+        const data: APILoginResponse = await res.json();
+        const isSuccess = data.success;
+
+        if (isSuccess) {
+            const token = data.token;
+            if (token === undefined) return;
+            const response = NextResponse.json({ success: true })
+            response.cookies.set('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'strict',
+                path: '/',
+                maxAge: 60 * 60 * 24 // HACK: one Day
+            })
+
+            redirect('/admin');
             // In a real app, you would set authentication state/tokens here
         } else {
             setError("ユーザー名またはパスワードが正しくありません")
