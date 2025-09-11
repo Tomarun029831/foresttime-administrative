@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -13,9 +12,7 @@ import {
 } from "lucide-react"
 import { mockEmployees, mockPunches, mockTools, mockGeoFences } from "@/lib/mock-data"
 
-type ActiveView = "overview" | "geofence" | "attendance" | "employees" | "tasks" | "tools" | "reports"
 export default function AdminDashboard() {
-    const [activeView, setActiveView] = useState<ActiveView>("overview")
     // HACK: const activeEmployees = mockEmployees.filter((emp) => emp.isActive).length
     const todayPunches = mockPunches.filter((punch) => {
         const today = new Date()
