@@ -15,7 +15,7 @@ import {
     LogOut,
 } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 
 interface NavItem {
     href: string
@@ -51,7 +51,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 <p className="text-xs text-muted-foreground">管理システム</p>
                             </div>
                         </div>
-                        <Button onClick={() => { }  /* onLogout */} variant="outline" size="sm">
+                        <Button onClick={() => redirect('/')} variant="outline" size="sm">
                             <LogOut className="w-4 h-4 mr-2" />
                             ログアウト
                         </Button>
