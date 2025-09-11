@@ -1,3 +1,13 @@
+export interface APILoginRequest {
+    username: string,
+    password: string
+}
+
+export interface APILoginResponse {
+    success: boolean,
+    token?: string
+}
+
 export interface Account {
     id: string
     username: string
