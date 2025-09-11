@@ -6,12 +6,22 @@ export async function POST(req: Request) {
 
     const query: string = "?action=login"; // HACK:
     const gasUrl = process.env.GAS_URL
-    const resGAS = await fetch(gasUrl + query as string, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" }, // ブラウザから送るわけではないのでCORS対策は必要ない
-        body: JSON.stringify({ username, password }),
-    })
-    const data = await resGAS.json() as APILoginResponse
+    let resGAS: Response
+    try {
+        resGAS = await fetch(gasUrl + query as string, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }, // ブラウザから送るわけではないのでCORS対策は必要ない
+            body: JSON.stringify({ username, password }),
+        })
+    } catch (err) {
+        return NextResponse.json({ success: false }, { status: 500 })
+    }
+    let data: APILoginResponse
+    try {
+        data = await resGAS.json()
+    } catch (err) {
+        return NextResponse.json({ success: false }, { status: 500 })
+    }
     const isSuccess = data.success;
     if (!isSuccess) return NextResponse.json({ success: false }, { status: 401 })
     const token = data.token;
