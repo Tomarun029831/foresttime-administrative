@@ -8,6 +8,10 @@ export interface APILoginResponse {
     token?: string
 }
 
+export interface APITokenCheckRequest { token?: string }
+export interface APITokenCheckResponse { success: boolean }
+
+// ===  ===
 export interface Account {
     id: string
     username: string
