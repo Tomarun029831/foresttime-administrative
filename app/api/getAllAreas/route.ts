@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { APIAddEmployeeRequest, APIAddEmployeeResponse, APIGetAllEmployeesRequest, APIGetAllEmployeesResponse } from "@/lib/types";
+import { APIGetAllWorkareasRequest, APIGetAllWorkareasResponse } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
     const token = req.cookies.get("token")?.value;
     if (token === undefined) return NextResponse.json({ success: false }, { status: 500 });
-    const body = await req.json() as APIAddEmployeeRequest;
-    const newEmployee = body.newEmployee;
-    if (newEmployee === undefined) return NextResponse.json({ success: false }, { status: 504 });
 
-    const query: string = "?action=addEmployee";
+    const query: string = "?action=getAllWorkareas";
     const gasUrl = process.env.GAS_URL;
-    const reqBody: APIAddEmployeeRequest = { token: token, newEmployee: newEmployee };
+    const reqBody: APIGetAllWorkareasRequest = { token: token };
     let resGAS: Response;
     try {
         resGAS = await fetch(gasUrl + query as string, {
@@ -23,7 +20,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false }, { status: 501 })
     }
 
-    let data: APIAddEmployeeResponse
+    let data: APIGetAllWorkareasResponse
     try {
         data = await resGAS.json()
     } catch (err) {

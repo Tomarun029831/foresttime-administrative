@@ -51,8 +51,6 @@ export const mockGeoFences: GeoFence[] = [
             { latitude: 35.6772, longitude: 139.6493 },
         ],
         radius: 100,
-        isActive: true,
-        createdAt: new Date("2024-01-15"),
     },
     {
         id: "2",
@@ -65,8 +63,6 @@ export const mockGeoFences: GeoFence[] = [
             { latitude: 35.6672, longitude: 139.6393 },
         ],
         radius: 150,
-        isActive: true,
-        createdAt: new Date("2024-01-20"),
     },
 ]
 

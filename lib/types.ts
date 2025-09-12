@@ -23,24 +23,30 @@ export interface APITokenCheckResponse { success: boolean }
 
 export interface APIGetAllEmployeesRequest { token?: string }
 export interface APIGetAllEmployeesResponse { success: boolean, employees?: Employee[] }
-
 export interface APIAddEmployeeRequest { token?: string, newEmployee?: Employee }
 export interface APIAddEmployeeResponse { success: boolean }
-
 export interface APIDeleteEmployeeRequest { token?: string, employeeId?: string }
 export interface APIDeleteEmployeeResponse { success: boolean }
 
-// ===  ===
-export interface Account {
+// workarea
+export interface CircularGeoFence {
     id: string
-    username: string
-    password: string // In real app, this would be hashed
-    role: "admin"
-    createdAt: Date
+    name: string
+    center: { lat: number; lng: number }
+    radius: number // in meters
+    description: string
+    color: string
 }
+export interface APIGetAllWorkareasRequest { token?: string }
+export interface APIGetAllWorkareasResponse { success: boolean, employees?: CircularGeoFence[] }
+export interface APIAddWorkareaRequest { token?: string, area?: CircularGeoFence }
+export interface APIAddWorkareaResponse { success: boolean }
+export interface APIDeleteWorkareaRequest { token?: string, areaId?: string }
+export interface APIDeleteWorkareaResponse { success: boolean }
 
+// ===  ===
 export interface GeoFence {
-    id: string
+    id: string // Uuid
     name: string
     description?: string
     coordinates: {
@@ -48,7 +54,14 @@ export interface GeoFence {
         longitude: number
     }[]
     radius: number // in meters
-    isActive: boolean
+}
+
+
+export interface Account {
+    id: string
+    username: string
+    password: string // In real app, this would be hashed
+    role: "admin"
     createdAt: Date
 }
 
