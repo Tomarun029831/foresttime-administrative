@@ -51,8 +51,7 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
         setFilteredEmployees(filtered)
     }
 
-    const syncEmployeesToDataBase = (employee: Employee) => {
-        console.log(employee);
+    const pushNewEmployeeToDatabase = (employee: Employee) => {
         const res = fetch('/api/addEmployee', {
             method: 'POST',
             cache: 'no-store',
@@ -87,7 +86,7 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
                 hireDate: new Date(formData.hireDate)
             }
             setEmployees([...employees, newEmployee])
-            syncEmployeesToDataBase(newEmployee);
+            pushNewEmployeeToDatabase(newEmployee);
             setIsCreateDialogOpen(false)
             setFormData({
                 id: "",
@@ -324,8 +323,18 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
         )
     }
 
+    const deleteEmployeeFromDatabase = (employeeId: string) => {
+        const res = fetch('/api/deleteEmployee', {
+            method: 'POST',
+            cache: 'no-store',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 'employeeId': employeeId })
+        })
+    }
+
     const deleteEmployee = (employeeId: string) => {
         setEmployees(employees.filter((emp) => emp.id !== employeeId))
+        deleteEmployeeFromDatabase(employeeId);
         filterEmployees()
     }
 

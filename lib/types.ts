@@ -27,6 +27,9 @@ export interface APIGetAllEmployeesResponse { success: boolean, employees?: Empl
 export interface APIAddEmployeeRequest { token?: string, newEmployee?: Employee }
 export interface APIAddEmployeeResponse { success: boolean }
 
+export interface APIDeleteEmployeeRequest { token?: string, employeeId?: string }
+export interface APIDeleteEmployeeResponse { success: boolean }
+
 // ===  ===
 export interface Account {
     id: string
