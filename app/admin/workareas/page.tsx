@@ -1,4 +1,5 @@
 "use client"
+export const dynamic = "force-dynamic"
 
 import type React from "react"
 
@@ -22,7 +23,7 @@ interface GeoFence {
     color: string
 }
 
-export default function WorkAreaManagement({ onNavigate }: WorkAreaManagementProps) {
+export default function WorkAreaManagement() {
     const mapRef = useRef<HTMLDivElement>(null)
     const [areas, setAreas] = useState<GeoFence[]>([
         {
