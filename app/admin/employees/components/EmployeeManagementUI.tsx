@@ -51,6 +51,16 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
         setFilteredEmployees(filtered)
     }
 
+    const syncEmployeesToDataBase = (employee: Employee) => {
+        console.log(employee);
+        const res = fetch('/api/addEmployee', {
+            method: 'POST',
+            cache: 'no-store',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 'newEmployee': employee })
+        })
+    }
+
     useEffect(() => {
         filterEmployees()
     }, [employees, searchTerm, departmentFilter, statusFilter])
@@ -77,6 +87,7 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
                 hireDate: new Date(formData.hireDate)
             }
             setEmployees([...employees, newEmployee])
+            syncEmployeesToDataBase(newEmployee);
             setIsCreateDialogOpen(false)
             setFormData({
                 id: "",
