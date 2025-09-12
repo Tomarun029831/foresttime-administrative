@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { redirect, usePathname } from "next/navigation"
+import { cookies } from "next/headers"
 
 interface NavItem {
     href: string
@@ -25,7 +26,6 @@ interface NavItem {
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname()
-
     const navItems: NavItem[] = [
         { href: "/admin", label: "概要", icon: Activity },
         { href: "/admin/workareas", label: "作業エリア管理", icon: MapPin },
@@ -35,6 +35,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         { href: "/admin/tools", label: "道具管理", icon: Wrench },
         { href: "/admin/reports", label: "日報", icon: FileText },
     ]
+    const logoutHandler = async () => {
+        const req = await fetch('/api/logout',
+            {
+                method: 'POST'
+            });
+        redirect('/');
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -51,7 +58,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 <p className="text-xs text-muted-foreground">管理システム</p>
                             </div>
                         </div>
-                        <Button onClick={() => redirect('/')} variant="outline" size="sm">
+                        <Button onClick={logoutHandler} variant="outline" size="sm">
                             <LogOut className="w-4 h-4 mr-2" />
                             ログアウト
                         </Button>
