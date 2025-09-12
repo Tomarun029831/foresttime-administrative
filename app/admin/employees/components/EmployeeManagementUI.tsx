@@ -1,7 +1,7 @@
 "use client"
 export const dynamic = "force-dynamic"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,7 +19,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Users, Plus, Edit, Trash2, Search, Phone, Mail, Calendar, Building } from "lucide-react"
 import { mockPunches } from "@/lib/mock-data"
 import type { Employee } from "@/lib/types"
-import { randomUUID } from "crypto"
 
 interface EmployeeManagementUIProps { fetchedEmployees?: Employee[]; }
 export default function EmployeeManagementUI({ fetchedEmployees = [], }: EmployeeManagementUIProps) {
@@ -52,10 +51,9 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
         setFilteredEmployees(filtered)
     }
 
-    // Update filters when dependencies change
-    useState(() => {
+    useEffect(() => {
         filterEmployees()
-    })
+    }, [employees, searchTerm, departmentFilter, statusFilter])
 
     const CreateEmployeeDialog = () => {
         const [formData, setFormData] = useState({
@@ -70,13 +68,13 @@ export default function EmployeeManagementUI({ fetchedEmployees = [], }: Employe
 
         const handleCreate = () => {
             const newEmployee: Employee = {
-                id: randomUUID(),
+                id: crypto.randomUUID(),
                 name: formData.name,
                 department: formData.department,
                 position: formData.position,
                 phoneNumber: formData.phoneNumber || undefined,
                 email: formData.email || undefined,
-                hireDate: undefined
+                hireDate: new Date(formData.hireDate)
             }
             setEmployees([...employees, newEmployee])
             setIsCreateDialogOpen(false)

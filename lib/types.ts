@@ -1,3 +1,13 @@
+export interface Employee {
+    id: string // Uuid
+    name: string
+    phoneNumber?: string
+    email?: string
+    department: string
+    position: string
+    hireDate?: Date
+}
+
 export interface APILoginRequest {
     username: string,
     password: string
@@ -21,16 +31,6 @@ export interface Account {
     password: string // In real app, this would be hashed
     role: "admin"
     createdAt: Date
-}
-
-export interface Employee {
-    id: string // Uuid
-    name: string
-    phoneNumber?: string
-    email?: string
-    department: string
-    position: string
-    hireDate?: string
 }
 
 export interface GeoFence {
