@@ -7,7 +7,6 @@ export async function POST(req: Request) {
         secure: true,
         sameSite: "strict",
         path: "/",
-        maxAge: 0,
     })
     return response
 }

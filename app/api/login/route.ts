@@ -4,7 +4,7 @@ import { APILoginRequest, APILoginResponse } from "@/lib/types";
 export async function POST(req: Request) {
     const { username, password } = await req.json() as APILoginRequest
 
-    const query: string = "?action=login"; // HACK:
+    const query: string = "?action=login";
     const gasUrl = process.env.GAS_URL
     let resGAS: Response
     try {
@@ -34,7 +34,6 @@ export async function POST(req: Request) {
         secure: true,
         sameSite: "strict",
         path: "/",
-        maxAge: 60 * 60 * 24, // HACK: one Day
     })
 
     return response

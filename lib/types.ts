@@ -11,6 +11,9 @@ export interface APILoginResponse {
 export interface APITokenCheckRequest { token?: string }
 export interface APITokenCheckResponse { success: boolean }
 
+export interface APIGetAllEmployeesRequest { token?: string }
+export interface APIGetAllEmployeesResponse { success: boolean, employees?: Employee[] }
+
 // ===  ===
 export interface Account {
     id: string
@@ -23,11 +26,11 @@ export interface Account {
 export interface Employee {
     id: string // Uuid
     name: string
-    phoneNumber: string
+    phoneNumber?: string
     email?: string
     department: string
     position: string
-    hireDate: Date
+    hireDate?: string
 }
 
 export interface GeoFence {

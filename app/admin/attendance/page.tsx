@@ -122,20 +122,6 @@ export default function AttendanceMonitoring() {
             : { status: "退勤済み", color: "blue" }
     }
 
-    // Statistics
-    const todayPunches = punches.filter((punch) => {
-        const today = new Date().toDateString()
-        return new Date(punch.timestamp).toDateString() === today
-    })
-
-    const currentlyWorking = mockEmployees.filter((emp) => {
-        const status = getEmployeeStatus(emp.id)
-        return status.status === "勤務中"
-    }).length
-
-    const todayPunchIns = todayPunches.filter((punch) => punch.type === "punch_in").length
-    const todayPunchOuts = todayPunches.filter((punch) => punch.type === "punch_out").length
-
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -155,60 +141,13 @@ export default function AttendanceMonitoring() {
                 </div>
             </div>
 
-            {/* Statistics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">現在勤務中</CardTitle>
-                        <User className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold text-green-600">{currentlyWorking}</div>
-                        <p className="text-xs text-muted-foreground">人</p>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">本日出勤</CardTitle>
-                        <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold text-blue-600">{todayPunchIns}</div>
-                        <p className="text-xs text-muted-foreground">回</p>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">本日退勤</CardTitle>
-                        <Timer className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold text-orange-600">{todayPunchOuts}</div>
-                        <p className="text-xs text-muted-foreground">回</p>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">総打刻数</CardTitle>
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold text-purple-600">{punches.length}</div>
-                        <p className="text-xs text-muted-foreground">件</p>
-                    </CardContent>
-                </Card>
-            </div>
-
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Current Status */}
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <User className="h-5 w-5" />
-                            現在の勤務状況
+                            現在の打刻状況
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -221,7 +160,9 @@ export default function AttendanceMonitoring() {
                                             <p className="font-medium">{employee.name}</p>
                                         </div>
                                         <Badge
-                                            variant={status.color === "green" ? "default" : status.color === "blue" ? "secondary" : "outline"}
+                                            variant={status.color === "green" ? "default" :
+                                                status.color === "blue" ? "secondary" :
+                                                    "outline"}
                                             className={status.color === "green" ? "bg-green-600" : ""}
                                         >
                                             {status.status}
@@ -238,7 +179,7 @@ export default function AttendanceMonitoring() {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Clock className="h-5 w-5" />
-                            最新の打刻活動
+                            今日の打刻活動
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -249,8 +190,7 @@ export default function AttendanceMonitoring() {
                                 return (
                                     <div key={punch.id} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
                                         <div
-                                            className={`w-2 h-2 rounded-full mt-2 ${punch.type === "punch_in" ? "bg-green-500" : "bg-blue-500"
-                                                }`}
+                                            className={`w-2 h-2 rounded-full mt-2 ${punch.type === "punch_in" ? "bg-green-500" : "bg-blue-500"}`}
                                         />
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between">
