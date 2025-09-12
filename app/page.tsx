@@ -28,6 +28,7 @@ export default function LoginPage() {
         const acconut: APILoginRequest = { username: username, password: password };
         const res = await fetch('/api/login', {
             method: 'POST',
+            cache: 'no-store',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(acconut)
         });

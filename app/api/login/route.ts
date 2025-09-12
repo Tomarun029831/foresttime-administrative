@@ -9,8 +9,9 @@ export async function POST(req: Request) {
     let resGAS: Response
     try {
         resGAS = await fetch(gasUrl + query as string, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }, // ブラウザから送るわけではないのでCORS対策は必要ない
+            method: 'POST',
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json' }, // ブラウザから送るわけではないのでCORS対策は必要ない
             body: JSON.stringify({ username, password }),
         })
     } catch (err) {
