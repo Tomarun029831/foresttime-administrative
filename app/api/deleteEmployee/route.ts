@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
     if (token === undefined) return NextResponse.json({ success: false }, { status: 500 });
     const body = await req.json() as APIDeleteEmployeeRequest;
     const employeeId = body.employeeId;
-    console.log(body);
     if (employeeId === undefined) return NextResponse.json({ success: false }, { status: 504 });
 
     const query: string = "?action=deleteEmployee";

@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
     let data
     try {
         data = await resGAS.json()
-        console.log(data);
     } catch (err) {
         return NextResponse.json({ success: false }, { status: 502 })
     }
