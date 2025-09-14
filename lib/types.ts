@@ -8,6 +8,24 @@ export interface Employee {
     hireDate?: Date
 }
 
+export interface WorkingSession {
+    session_id: string
+    user_id: string
+    work_area: string
+    start_time: string
+    end_time: string
+    total_work_duration: string
+    total_break_time: string
+    step_count: number
+    distance_traveled: string
+    sync_timestamp: string
+    device_info: string
+    weather_info: string
+    session_status: string
+}
+export interface APIGetAllWorksessionsRequest { }
+export interface APIGetAllWorksessionsResponse { success: boolean, workingSessions?: WorkingSession[] }
+
 export interface APILoginRequest {
     username: string,
     password: string
@@ -83,6 +101,12 @@ export interface Tool {
     nextMaintenanceDate?: Date
     createdAt: Date
 }
+
+/*
+
+session_id	user_id	work_area	start_time	end_time	total_work_duration	total_break_time	step_count	distance_traveled	sync_timestamp	device_info	weather_info	session_status
+
+ */
 
 export interface Punch {
     id: string
